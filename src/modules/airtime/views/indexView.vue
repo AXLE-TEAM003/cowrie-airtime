@@ -253,7 +253,7 @@ export default {
       this.tabItem = value;
     },
     selectNum(value) {
-      this.credentials.request.amount = value;
+      this.credentials.request.amount = Number(value);
     },
 
     done(value) {
