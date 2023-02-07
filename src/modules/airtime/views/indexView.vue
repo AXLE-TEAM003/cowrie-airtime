@@ -153,8 +153,8 @@
                 <span class="text-muted">{{ credentials.request.phone }}</span>
               </div>
             </div>
-            <div>
-              <button class="btn--primary w-100 mt-2" @click="handleClose">
+            <div class="mt-4">
+              <button class="btn--primary w-100" @click="handleClose">
                 Ok
               </button>
             </div>
@@ -178,6 +178,9 @@
               Your N{{ credentials.request.amount }} airtime <br />
               purchase was not successful.
             </h6>
+          </div>
+          <div class="mt-4">
+            <button class="btn--primary w-100" @click="handleClose">Ok</button>
           </div>
         </div>
       </el-drawer>
