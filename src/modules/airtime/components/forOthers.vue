@@ -69,7 +69,7 @@
 import categories from "@/api/categories";
 export default {
   props: {
-    Amount: String,
+    Amount: Number,
     PhoneNumber: String,
   },
   components: {},
@@ -95,15 +95,16 @@ export default {
       this.selected.selected = true;
     },
     handleChange(value) {
-      if (value === "decrease") {
-        if (this.initialNum > 0) {
-          this.initialNum--;
-        } else {
-          return this.initialNum;
-        }
-      } else {
-        this.initialNum++;
-      }
+      //   if (value === "decrease") {
+      //     if (this.initialNum > 0) {
+      //       this.initialNum--;
+      //     } else {
+      //       return this.initialNum;
+      //     }
+      //   } else {
+      //     this.initialNum++;
+      //   }
+      this.$emit("handleChange", value);
     },
     selectAmount(value) {
       this.$emit("selectNum", value);

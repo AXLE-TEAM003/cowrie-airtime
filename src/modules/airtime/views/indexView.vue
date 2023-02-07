@@ -84,12 +84,14 @@
           v-if="tabItem === '1'"
           :Amount.sync="credentials.request.amount"
           @selectNum="selectNum"
+          @handleChange="handleChange"
         />
         <ForOthers
           :Amount.sync="credentials.request.amount"
           :PhoneNumber.sync="credentials.request.phone"
           v-if="tabItem === '2'"
           @selectNum="selectNum"
+          @handleChange="handleChange"
         />
       </div>
     </section>
@@ -115,7 +117,7 @@
           <KeyBoard @close="handleClose" @done="done" />
         </div>
 
-        <div class="succesful" v-if="succesful">
+        <div class="succesful" v-show="succesful">
           <h5 class="text-center font-weight-bold">Success</h5>
           <div class="my-2">
             <span>
@@ -154,7 +156,7 @@
           </div>
         </div>
 
-        <div class="succesful" v-if="failed">
+        <div class="succesful" v-show="failed">
           <h5 class="text-center font-weight-bold text-danger">Error</h5>
           <div class="my-2 text-center">
             <span class="fail-status">
@@ -212,7 +214,7 @@ export default {
         request: {
           net: "",
           phone: "",
-          amount: "0",
+          amount: 0,
         },
       },
       responseData: {},
@@ -250,7 +252,7 @@ export default {
       this.credentials.auth.passcode = value;
       this.loading = true;
       axios
-        .post("http://enaira.cowrie.services/airtime", this.credentials)
+        .post("https://enaira.cowrie.services/airtime", this.credentials)
         .then((res) => {
           console.log(res);
           this.succesful = true;
@@ -265,6 +267,17 @@ export default {
     handleClose() {
       (this.failed = false), (this.succesful = false);
       this.drawer = false;
+    },
+    handleChange(value) {
+      if (value === "decrease") {
+        if (this.credentials.request.amount > 0) {
+          this.credentials.request.amount--;
+        } else {
+          return this.credentials.request.amount;
+        }
+      } else {
+        this.credentials.request.amount++;
+      }
     },
   },
   computed: {},
