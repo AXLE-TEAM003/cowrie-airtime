@@ -1,0 +1,238 @@
+#main {
+  /* padding: 20px 0; */
+  width: 40%;
+  margin: 0 auto;
+  height:100vh
+}
+
+.input-field {
+  border: 1px solid var(--gray-100);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  border-radius: 5px;
+}
+
+.input-area {
+  border: 1px solid var(--gray-100);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 15px;
+  border-radius: 5px;
+}
+
+label {
+  margin-bottom: 3px !important;
+  font-size: 14px;
+  color: var(--gray-400);
+}
+
+
+.input-field input {
+  width: 100%;
+  display: block;
+  border: none;
+  padding: 12px 15px;
+  outline: none;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.tabs-header {
+  display: flex;
+  position: relative;
+}
+
+.tabs-header::after {
+  content: "";
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  bottom: -10px;
+  background-color: var(--gray-100);
+
+}
+
+.tabs-header span {
+  width: 100%;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+  color: var(--gray-400);
+
+}
+
+.tabs-header span.active {
+  color: var(--primary-color);
+  position: relative;
+  font-weight: 600;
+}
+
+.tabs-header span.active::after {
+  content: "";
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  bottom: -10px;
+  background-color: var(--primary-color);
+  z-index: 999;
+  left: 0;
+}
+
+.tab-content {
+  margin-top: 25px !important;
+}
+
+.el-drawer.btt, .el-drawer.ttb {
+  border-radius: 20px 20px 0 0;
+  padding: 40px 20px;
+}
+
+.keyboard {
+  display: grid;
+  grid-template-columns: repeat(3, 65px);
+  gap:20px;
+  width: 100%;
+  justify-content: center;
+}
+
+.keyboard span {
+  text-align: center;
+  background-color: var(--light-accent);
+  height: 65px;
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 10px;
+}
+
+.keyboard-container h6 {
+  font-weight: 700;
+  text-align: center;
+}
+
+.keyboard span.ok {
+  background-color: var(--primary-color);
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.keyboard-container .code-input {
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(4, 55px);
+  align-items: center;
+  gap:5px;
+  width: 100%;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+.keyboard-container .code-input span {
+  border: 1px solid var(--gray-100);
+  height: 55px;
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 10px;
+}
+
+
+
+.input-qty {
+  /* border:1px solid var(--gray-300);
+  border-radius: 30px;
+  padding: 3px 12px; */
+  width: 100%
+}
+
+.input-qty  input {
+  padding: 12px 0px;
+  font-size: 18px;
+  outline: none;
+  border: 1px solid var(--gray-200);
+  width: 100%;
+  border-radius: 5px;
+  text-align: center;
+
+}
+
+.input-qty span  {
+  padding: 12px 15px;
+  font-size: 18px;
+  outline: none;
+  border: 1px solid var(--gray-200);
+  /* width: 100%; */
+  border-radius: 5px;
+  text-align: center;
+}
+
+.select-amounts {
+  display: flex;
+  gap:10px
+}
+.select-amounts span {
+  width: 100%;
+  text-align: center;
+  background-color: var(--light-accent);
+  font-weight: 500;
+  font-size: 15px;
+  padding: 10px 4px;
+  border-radius: 12px;
+}
+
+.succesful .details span {
+  font-size: 14px;
+  font-weight: 500;
+  word-break: break-all;
+}
+
+.succesful .details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.loading{
+  min-height: 100vh;
+  pointer-events: none !important;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 1000vw;
+  z-index: 99999;
+}
+
+.loading span {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+.success-status {
+  background-color: var(--light-accent);
+  color: var(--primary-color);
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  font-size: 50px;
+  margin: 0 auto;
+  display: block;
+}

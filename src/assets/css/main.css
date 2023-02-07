@@ -1,0 +1,9 @@
+@import url(../css/home-style.css);
+
+@import url("../css/nav.css");
+@import url('./partials.css');
+@import url("../css/iconsax-css/style.css");
+@import url("../css/commons.css");
+
+/* Media Query  */
+@import url("../css/media-query.css");
