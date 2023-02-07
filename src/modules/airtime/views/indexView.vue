@@ -153,6 +153,11 @@
                 <span class="text-muted">{{ credentials.request.phone }}</span>
               </div>
             </div>
+            <div>
+              <button class="btn--primary w-100 mt-2" @click="handleClose">
+                Ok
+              </button>
+            </div>
           </div>
         </div>
 
@@ -252,7 +257,7 @@ export default {
       this.credentials.auth.passcode = value;
       this.loading = true;
       axios
-        .post("https://enaira.cowrie.services/airtime", this.credentials)
+        .post("http://enaira.cowrie.services/airtime", this.credentials)
         .then((res) => {
           console.log(res);
           this.succesful = true;
