@@ -109,7 +109,6 @@
         title="I am the title"
         :visible.sync="drawer"
         direction="btt"
-        size="80%"
         :withHeader="false"
         :before-close="handleClose"
       >
@@ -140,7 +139,7 @@
             <div>
               <div class="details">
                 <span>Date</span>
-                <!-- <span class="text-muted">{{ date }}</span> -->
+                <span class="text-muted">{{ timestamp }}</span>
               </div>
               <hr />
               <div class="details">
@@ -226,6 +225,7 @@ export default {
         },
       },
       responseData: {},
+      timestamp: "",
     };
   },
 
@@ -242,7 +242,7 @@ export default {
     getNetwork(value) {
       this.selected = value;
       this.selected.selected = true;
-      this.credentials.request.net = value.name;
+      this.credentials.request.net = value.alias;
     },
 
     handleClick(tab, event) {
@@ -259,8 +259,9 @@ export default {
     done(value) {
       this.credentials.auth.passcode = value;
       this.loading = true;
+      this.getNow();
       axios
-        .post("http://enaira.cowrie.services/airtime", this.credentials)
+        .post("https://enaira.cowrie.services/airtime", this.credentials)
         .then((res) => {
           console.log(res);
           this.succesful = true;
@@ -286,6 +287,34 @@ export default {
       } else {
         this.credentials.request.amount++;
       }
+    },
+    getNow: function () {
+      let days = [
+        { id: 1, name: "Jan" },
+        { id: 2, name: "Feb" },
+        { id: 3, name: "Mar" },
+        { id: 4, name: "Apr" },
+        { id: 5, name: "May" },
+        { id: 6, name: "Jun" },
+        { id: 7, name: "Jul" },
+        { id: 8, name: "Aug" },
+        { id: 9, name: "Sept" },
+        { id: 10, name: "Oct" },
+        { id: 11, name: "Nov" },
+        { id: 12, name: "Dec" },
+      ];
+      const today = new Date();
+      const date =
+        today.getDate() +
+        " " +
+        days[today.getMonth() + 1].name +
+        " " +
+        today.getFullYear();
+      const time =
+        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      const dateTime = date + " | " + time;
+      // const dateTime = date;
+      this.timestamp = dateTime;
     },
   },
   computed: {},
