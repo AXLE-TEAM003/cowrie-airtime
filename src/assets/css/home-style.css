@@ -100,7 +100,17 @@ input[type=number] {
 .el-drawer.btt, .el-drawer.ttb {
   border-radius: 20px 20px 0 0;
   padding: 40px 20px;
-  height: max-content !important;
+  height: auto !important;
+
+
+}
+
+.el-drawer.btt, .el-drawer.ttb, .el-drawer__container {
+  /* height: max-content !important; */
+}
+
+.el-drawer.btt, .el-drawer.ttb {
+  /* height: max-content !important; */
 }
 
 .keyboard {
