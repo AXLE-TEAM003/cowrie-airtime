@@ -259,7 +259,6 @@ export default {
     done(value) {
       this.credentials.auth.passcode = value;
       this.loading = true;
-      this.getNow();
       axios
         .post("https://enaira.cowrie.services/airtime", this.credentials)
         .then((res) => {
@@ -271,7 +270,10 @@ export default {
           console.log(err);
           this.failed = true;
         })
-        .finally(() => [(this.loading = false)]);
+        .finally(() => {
+          this.getNow();
+          this.loading = false;
+        });
     },
     handleClose() {
       (this.failed = false), (this.succesful = false);
