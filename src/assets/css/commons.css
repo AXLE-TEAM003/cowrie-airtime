@@ -1,0 +1,17 @@
+.el-collapse-item__header {
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    height: unset !important;
+    line-height: 25px !important;
+    padding: 10px;
+}
+
+.el-collapse-item__content {
+    font-size: 14px !important;
+    background-color:#F8FAFC;
+    padding: 10px;
+}
+
+.el-collapse-item__header.is-active {
+    background-color:#F8FAFC;
+}
