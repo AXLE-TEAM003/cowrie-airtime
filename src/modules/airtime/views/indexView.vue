@@ -284,10 +284,13 @@
           </div>
 
           <div class="mt-4">
-            <h6 class="text-center font-weight-bold text-danger">
+            <h6 class="text-center font-weight-bold">
               Your N{{ credentials.request.amount }} airtime <br />
               purchase was not successful.
             </h6>
+            <div class="text-center">
+              <small class="text-danger">{{ responseData.message }}</small>
+            </div>
           </div>
           <div class="mt-4">
             <button class="btn--primary w-100" @click="handleClose">Ok</button>
@@ -393,6 +396,7 @@ export default {
         .catch((err) => {
           console.log(err);
           this.failed = true;
+          this.responseData = err.response.data;
         })
         .finally(() => {
           this.getNow();
