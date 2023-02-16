@@ -16,7 +16,7 @@
     </div>
 
     <!-- Drawer Menu  -->
-    <el-drawer size="80%" :visible.sync="drawer" :direction="direction">
+    <el-drawer size="80%" :visible.sync="drawer" direction="rtl">
       <div class="py-3 px-4">
         <ul class="mb-0 d-flex flex-column" style="gap: 20px">
           <li role="button" @click="drawer = !drawer">
@@ -41,7 +41,7 @@
         size="100%"
         :visible.sync="support"
         title="Support"
-        :direction="direction"
+        direction="rtl"
       >
         <div class="py-3 px-4">
           <support-page />
@@ -56,7 +56,7 @@
         size="100%"
         :visible.sync="faq"
         title="FAQs"
-        :direction="direction"
+        direction="rtl"
       >
         <div class="py-3 px-4">
           <faq-s />

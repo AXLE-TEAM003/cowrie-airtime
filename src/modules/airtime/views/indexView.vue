@@ -4,6 +4,9 @@
     element-loading-background="rgba(0, 0, 0, 0.8)"
   >
     <section class="container py-4">
+      <!-- <div>
+        {{ validated }}
+      </div> -->
       <div class="mb-3">
         <label for="">Enter eWallet ID</label>
         <div class="input-field">
@@ -14,6 +17,7 @@
             v-model="credentials.auth.walletId"
           />
           <i-icon
+            v-if="credentials.auth.walletId.length === 11"
             icon="teenyicons:tick-small-outline"
             width="24px"
             color="green"
@@ -80,7 +84,71 @@
         >
       </div>
       <div class="tab-content container">
-        <ForMe
+        <div class="mb-3">
+          <label for="">Choose Category</label>
+          <el-dropdown class="w-100" trigger="click">
+            <div class="input-area el-dropdown-link">
+              <span>{{ selectedCategory.name }}</span>
+              <i class="el-icon-arrow-down el-icon--right"></i>
+            </div>
+
+            <el-dropdown-menu slot="dropdown" class="w-50">
+              <el-dropdown-item v-for="item in categories" :key="item.id">
+                <span
+                  @click="getCategory(item)"
+                  class="d-flex align-items-center"
+                  style="gap: 10px"
+                >
+                  <span>{{ item.name }}</span>
+                </span>
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
+
+        <div class="mb-4">
+          <label for="">Enter Amount</label>
+          <div class="input-qty d-flex align-items-center" style="gap: 10px">
+            <span role="button" @click="handleChange('decrease')">
+              <i-icon icon="ic:twotone-minus" />
+            </span>
+            <input
+              type="tel"
+              min="1"
+              max="10"
+              v-model="credentials.request.amount"
+            />
+            <span role="button" @click="handleChange('increase')">
+              <i-icon icon="ic:baseline-plus" />
+            </span>
+          </div>
+        </div>
+
+        <!-- Select Amounts  -->
+        <div class="select-amounts mb-4">
+          <span role="button" @click="selectAmount('100')">₦100</span>
+          <span role="button" @click="selectAmount('500')">₦500</span>
+          <span role="button" @click="selectAmount('1000')">₦1,000</span>
+          <span role="button" @click="selectAmount('5000')">₦5,000</span>
+        </div>
+
+        <!-- Enter Mobile Number -->
+        <div class="mb-3" v-if="tabItem === '2'">
+          <label for="">Mobile Number</label>
+          <div class="input-field">
+            <input
+              type="tel"
+              maxlength="11"
+              v-model="credentials.request.phone"
+            />
+            <i-icon
+              icon="ic:baseline-phone-in-talk"
+              width="24px"
+              color="green"
+            />
+          </div>
+        </div>
+        <!-- <ForMe
           v-if="tabItem === '1'"
           :Amount.sync="credentials.request.amount"
           @selectNum="selectNum"
@@ -92,13 +160,58 @@
           v-if="tabItem === '2'"
           @selectNum="selectNum"
           @handleChange="handleChange"
-        />
+        /> -->
       </div>
     </section>
 
     <!-- Button  to Continue -->
     <div class="mt-3 container">
-      <button @click="continueToNext" class="btn--primary w-100">
+      <button
+        v-if="tabItem === '1'"
+        @click="continueToNext"
+        :class="{
+          'bg-secondary':
+            credentials.auth.walletId === '' ||
+            credentials.request.net === '' ||
+            credentials.request.amount < 1 ||
+            credentials.auth.walletId.length < 11 ||
+            !selectedCategory.selected,
+        }"
+        :disabled="
+          credentials.auth.walletId === '' ||
+          credentials.request.net === '' ||
+          credentials.request.amount > 1 ||
+          credentials.auth.walletId.length < 11 ||
+          !selectedCategory.selected
+        "
+        class="btn--primary w-100"
+      >
+        Continue
+      </button>
+      <button
+        v-if="tabItem === '2'"
+        @click="continueToNext"
+        :class="{
+          'bg-secondary':
+            credentials.auth.walletId === '' ||
+            credentials.request.net === '' ||
+            credentials.request.amount > 1 ||
+            credentials.auth.walletId.length < 11 ||
+            !selectedCategory.selected ||
+            credentials.request.phone === '' ||
+            credentials.request.phone.length < 11,
+        }"
+        :disabled="
+          credentials.auth.walletId === '' ||
+          credentials.request.net === '' ||
+          credentials.request.amount > 1 ||
+          credentials.auth.walletId.length < 11 ||
+          !selectedCategory.selected ||
+          credentials.request.phone === '' ||
+          credentials.request.phone.length < 11
+        "
+        class="btn--primary w-100"
+      >
         Continue
       </button>
     </div>
@@ -189,25 +302,30 @@
 
 <script>
 import axios from "axios";
+import categories from "@/api/categories";
 import networks from "@/api/networks";
-import ForMe from "../components/forMe.vue";
-import ForOthers from "../components/forOthers.vue";
+// import ForMe from "../components/forMe.vue";
+// import ForOthers from "../components/forOthers.vue";
 import KeyBoard from "../components/KeyBoard.vue";
 export default {
   components: {
-    ForMe,
-    ForOthers,
     KeyBoard,
   },
   data() {
     return {
       loading: false,
       networks,
+      categories,
       drawer: false,
       activeName: "first",
       succesful: false,
       failed: false,
       tabItem: "1",
+      selectedCategory: {
+        selected: false,
+        name: "Choose Category",
+        icon: null,
+      },
       selected: {
         selected: false,
         name: "Select Provider",
@@ -226,10 +344,16 @@ export default {
       },
       responseData: {},
       timestamp: "",
+      phoneNum: "",
     };
   },
 
   methods: {
+    getCategory(value) {
+      this.selectedCategory = value;
+      this.selectedCategory.selected = true;
+    },
+
     continueToNext() {
       this.drawer = true;
       if (this.tabItem === "1") {
@@ -239,6 +363,7 @@ export default {
         localStorage.setItem("credentials", JSON.stringify(this.credentials));
       }
     },
+
     getNetwork(value) {
       this.selected = value;
       this.selected.selected = true;
@@ -252,7 +377,8 @@ export default {
     selectTab(value) {
       this.tabItem = value;
     },
-    selectNum(value) {
+
+    selectAmount(value) {
       this.credentials.request.amount = Number(value);
     },
 
@@ -275,10 +401,12 @@ export default {
           this.loading = false;
         });
     },
+
     handleClose() {
       (this.failed = false), (this.succesful = false);
       this.drawer = false;
     },
+
     handleChange(value) {
       if (value === "decrease") {
         if (this.credentials.request.amount > 0) {
@@ -319,6 +447,7 @@ export default {
       this.timestamp = dateTime;
     },
   },
+
   computed: {},
 };
 </script>
