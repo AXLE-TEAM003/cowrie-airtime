@@ -180,7 +180,7 @@
         :disabled="
           credentials.auth.walletId === '' ||
           credentials.request.net === '' ||
-          credentials.request.amount > 1 ||
+          credentials.request.amount < 1 ||
           credentials.auth.walletId.length < 11 ||
           !selectedCategory.selected
         "
@@ -195,7 +195,7 @@
           'bg-secondary':
             credentials.auth.walletId === '' ||
             credentials.request.net === '' ||
-            credentials.request.amount > 1 ||
+            credentials.request.amount < 1 ||
             credentials.auth.walletId.length < 11 ||
             !selectedCategory.selected ||
             credentials.request.phone === '' ||
@@ -204,11 +204,9 @@
         :disabled="
           credentials.auth.walletId === '' ||
           credentials.request.net === '' ||
-          credentials.request.amount > 1 ||
+          credentials.request.amount < 1 ||
           credentials.auth.walletId.length < 11 ||
-          !selectedCategory.selected ||
-          credentials.request.phone === '' ||
-          credentials.request.phone.length < 11
+          !selectedCategory.selected
         "
         class="btn--primary w-100"
       >
