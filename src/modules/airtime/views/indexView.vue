@@ -323,8 +323,8 @@ export default {
       failed: false,
       tabItem: "1",
       selectedCategory: {
-        selected: false,
-        name: "Choose Category",
+        selected: true,
+        name: "Airtime Purchase",
         icon: null,
       },
       selected: {

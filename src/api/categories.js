@@ -4,10 +4,10 @@ const networks = [
     name: "Airtime Purchase",
   },
 
-  {
-    id: 2,
-    name: "Data Purchase",
-  },
+  // {
+  //   id: 2,
+  //   name: "Data Purchase",
+  // },
 ];
 
 export default networks;

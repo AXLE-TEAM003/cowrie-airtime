@@ -65,8 +65,8 @@ export default {
       activeName: "first",
       tabItem: "1",
       selected: {
-        selected: false,
-        name: "Choose Category",
+        selected: true,
+        name: "Airtime Purchase",
         icon: null,
       },
       initialNum: 0,
