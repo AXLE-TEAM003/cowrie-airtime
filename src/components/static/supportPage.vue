@@ -9,7 +9,7 @@
         </div>
       </a>
 
-      <a href="mail-to:support@cowrie.services">
+      <a href="mailto:support@cowrie.services">
         <div class="support-item">
           <span> <i-icon icon="teenyicons:envelope-outline" /> </span>
           <span>support@cowrie.services</span>
