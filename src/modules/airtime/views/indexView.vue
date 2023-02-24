@@ -8,7 +8,7 @@
         {{ validated }}
       </div> -->
       <div class="mb-3">
-        <label for="">Enter eWallet ID</label>
+        <label for="">Enter eNaira Phone Number</label>
         <div class="input-field">
           <i-icon icon="ic:outline-lock" width="24px" />
           <input
