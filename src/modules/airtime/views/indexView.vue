@@ -39,7 +39,9 @@
                     style="width: 25px; height: 25px; border-radius: 3px"
                   />
                 </span>
-                <span>{{ selected.name }}</span>
+                <span>{{
+                  selected.selected ? selected.name : "Select Provider"
+                }}</span>
               </span>
             </span>
             <i class="el-icon-arrow-down el-icon--right"></i>
@@ -329,7 +331,7 @@ export default {
       },
       selected: {
         selected: false,
-        name: "Select Provider",
+        name: "",
         icon: null,
       },
       credentials: {
@@ -410,7 +412,6 @@ export default {
       this.credentials.request.net = "";
       this.credentials.request.phone = "";
       this.credentials.request.amount = 0;
-      this.selected.name = "Select Provider";
       this.selected.selected = false;
     },
 
