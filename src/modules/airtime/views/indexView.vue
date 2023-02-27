@@ -394,6 +394,7 @@ export default {
           console.log(res);
           this.succesful = true;
           this.responseData = res.data.data;
+          this.reset();
         })
         .catch((err) => {
           console.log(err);
@@ -426,6 +427,15 @@ export default {
         this.credentials.request.amount++;
       }
     },
+
+    reset() {
+      this.credentials.request.net = "";
+      this.credentials.request.phone = "";
+      this.credentials.request.amount = 0;
+      this.selected.name = "Select Provider";
+      this.selected.selected = false;
+    },
+
     getNow: function () {
       let days = [
         { id: 1, name: "Jan" },
