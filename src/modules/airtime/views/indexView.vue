@@ -265,7 +265,7 @@
             </div>
             <div class="mt-4">
               <button class="btn--primary w-100" @click="handleClose">
-                Ok
+                Submit
               </button>
             </div>
           </div>
@@ -407,6 +407,11 @@ export default {
     handleClose() {
       (this.failed = false), (this.succesful = false);
       this.drawer = false;
+      this.credentials.request.net = "";
+      this.credentials.request.phone = "";
+      this.credentials.request.amount = 0;
+      this.selected.name = "Select Provider";
+      this.selected.selected = false;
     },
 
     handleChange(value) {
